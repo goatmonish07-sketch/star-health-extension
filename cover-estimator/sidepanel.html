@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Cover Estimator</title>
+    <link rel="stylesheet" href="sidepanel.css" />
+  </head>
+  <body>
+    <header class="masthead">
+      <span class="wordmark">Health cover estimator</span>
+      <button id="reset" class="ghost" type="button">Start over</button>
+    </header>
+
+    <section class="readout" aria-live="polite">
+      <p class="readout__figure" id="figure">&#8377;0</p>
+      <p class="readout__caption" id="caption">a year, including 18% GST</p>
+      <p class="readout__monthly" id="monthly"></p>
+    </section>
+
+    <p class="advice" id="advice" hidden></p>
+
+    <main class="sheet">
+      <fieldset class="block">
+        <legend>Who's covered</legend>
+        <div class="segmented" role="radiogroup" aria-label="Plan type">
+          <button type="button" class="seg is-on" data-plan="individual" role="radio" aria-checked="true">
+            Individual
+          </button>
+          <button type="button" class="seg" data-plan="floater" role="radio" aria-checked="false">
+            Family floater
+          </button>
+        </div>
+        <p class="hint" id="planHint">One policy, one person. Premium is priced on your age alone.</p>
+
+        <ul class="members" id="members"></ul>
+        <button type="button" class="add" id="addMember">Add a family member</button>
+      </fieldset>
+
+      <fieldset class="block">
+        <legend>Cover amount</legend>
+        <input
+          type="range"
+          id="sumInsured"
+          min="0"
+          max="8"
+          step="1"
+          value="3"
+          aria-describedby="sumLabel"
+        />
+        <p class="rangeValue" id="sumLabel">&#8377;10 lakh</p>
+      </fieldset>
+
+      <fieldset class="block">
+        <legend>Where you live</legend>
+        <select id="city">
+          <option value="tier1">Metro city</option>
+          <option value="tier2">Tier 2 city</option>
+          <option value="tier3">Tier 3 city or town</option>
+        </select>
+        <p class="hint">Hospital costs drive this. Metro treatment is priced highest.</p>
+      </fieldset>
+
+      <fieldset class="block">
+        <legend>Health declarations</legend>
+        <label class="field" for="ped">Pre-existing conditions</label>
+        <select id="ped">
+          <option value="none">None declared</option>
+          <option value="controlled">One, medically controlled</option>
+          <option value="multiple">Two or more</option>
+        </select>
+        <label class="check">
+          <input type="checkbox" id="tobacco" />
+          <span>Someone covered uses tobacco</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="block">
+        <legend>Policy term</legend>
+        <div class="segmented" role="radiogroup" aria-label="Policy term">
+          <button type="button" class="seg is-on" data-term="1" role="radio" aria-checked="true">1 year</button>
+          <button type="button" class="seg" data-term="2" role="radio" aria-checked="false">2 years</button>
+          <button type="button" class="seg" data-term="3" role="radio" aria-checked="false">3 years</button>
+        </div>
+        <p class="hint" id="termHint">Longer terms carry a discount and lock your rate.</p>
+      </fieldset>
+
+      <section class="block working">
+        <h2>How this was worked out</h2>
+        <dl id="breakdown"></dl>
+        <button type="button" class="copy" id="copyEstimate">Copy this estimate</button>
+        <p class="copyNote" id="copyNote" role="status" aria-live="polite"></p>
+      </section>
+
+      <p class="disclaimer">
+        An estimate built on published market ranges, not a quote. Your actual
+        premium depends on medical underwriting and the insurer's filed rates.
+        Nothing you type here leaves your browser.
+      </p>
+
+      <p class="sitelink">
+        Read the full methodology and compare real plans at
+        <a id="siteLink" href="https://www.starhealth.in/" target="_blank" rel="noopener noreferrer">starhealth.in</a>.
+      </p>
+    </main>
+
+    <script src="rates.js"></script>
+    <script src="sidepanel.js"></script>
+  </body>
+</html>
