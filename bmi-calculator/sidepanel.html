@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="sidepanel.css" />
+  </head>
+  <body>
+    <header class="masthead">
+      <span class="wordmark">BMI calculator</span>
+      <button id="reset" class="ghost" type="button">Start over</button>
+    </header>
+
+    <section class="readout" aria-live="polite">
+      <p class="readout__figure" id="bmiValue">0.0</p>
+      <p class="readout__caption">your BMI (kg/m&#178;)</p>
+      <p class="readout__category" id="category">Enter your details below</p>
+    </section>
+
+    <div class="meter" aria-hidden="true">
+      <div class="meter__bar"></div>
+      <div class="meter__marker" id="marker"></div>
+      <div class="meter__scale">
+        <span>12</span><span>18.5</span><span>23</span><span>25</span><span>30</span><span>40</span>
+      </div>
+    </div>
+
+    <main class="sheet">
+      <fieldset class="block">
+        <legend>Units</legend>
+        <div class="segmented" role="radiogroup" aria-label="Unit system">
+          <button type="button" class="seg is-on" data-units="metric" role="radio" aria-checked="true">
+            Metric (cm, kg)
+          </button>
+          <button type="button" class="seg" data-units="imperial" role="radio" aria-checked="false">
+            Imperial (ft, lb)
+          </button>
+        </div>
+      </fieldset>
+
+      <fieldset class="block">
+        <legend>Your details</legend>
+
+        <label class="field" for="age">Age</label>
+        <input type="number" id="age" min="2" max="120" value="30" aria-describedby="ageHint" />
+        <p class="hint" id="ageHint">BMI categories below apply to adults aged 20 and over.</p>
+
+        <!-- Metric height/weight -->
+        <div id="metricInputs">
+          <label class="field" for="heightCm">Height (cm)</label>
+          <input type="number" id="heightCm" min="50" max="250" value="170" />
+          <label class="field" for="weightKg">Weight (kg)</label>
+          <input type="number" id="weightKg" min="10" max="400" value="70" />
+        </div>
+
+        <!-- Imperial height/weight -->
+        <div id="imperialInputs" hidden>
+          <label class="field">Height</label>
+          <div class="ftin">
+            <input type="number" id="heightFt" min="1" max="8" value="5" aria-label="Feet" />
+            <span class="unit">ft</span>
+            <input type="number" id="heightIn" min="0" max="11" value="7" aria-label="Inches" />
+            <span class="unit">in</span>
+          </div>
+          <label class="field" for="weightLb">Weight (lb)</label>
+          <input type="number" id="weightLb" min="20" max="900" value="154" />
+        </div>
+      </fieldset>
+
+      <section class="block working">
+        <h2>What this means</h2>
+        <dl id="breakdown"></dl>
+      </section>
+
+      <button type="button" class="copy" id="copyResult">Copy this result</button>
+      <p class="copyNote" id="copyNote" role="status" aria-live="polite"></p>
+
+      <p class="disclaimer">
+        BMI is a screening measure, not a diagnosis. It does not distinguish
+        muscle from fat, and for anyone under 20 a BMI-for-age percentile
+        applies instead. Nothing you type here leaves your browser.
+      </p>
+
+      <p class="sitelink">
+        Full BMI guide, formula and category tables at
+        <a id="siteLink" href="https://www.starhealth.in/bmi-calculator/" target="_blank" rel="noopener noreferrer">starhealth.in</a>.
+      </p>
+    </main>
+
+    <script src="bmiData.js"></script>
+    <script src="sidepanel.js"></script>
+  </body>
+</html>
