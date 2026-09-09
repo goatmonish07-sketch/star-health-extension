@@ -180,16 +180,26 @@ function buildShareText() {
 
 /* ---------- persistence ---------- */
 
+// `chrome.storage` only exists when this runs as an extension. Guard it so the
+// page still works if the file is opened directly in a browser.
+const hasStorage =
+  typeof chrome !== "undefined" && chrome.storage && chrome.storage.local;
+
 function save() {
-  chrome.storage?.local.set({ bmiState: state });
+  if (hasStorage) chrome.storage.local.set({ bmiState: state });
 }
 
 function restore() {
-  chrome.storage?.local.get("bmiState", (out) => {
-    if (out?.bmiState) Object.assign(state, out.bmiState);
+  if (hasStorage) {
+    chrome.storage.local.get("bmiState", (out) => {
+      if (out?.bmiState) Object.assign(state, out.bmiState);
+      syncControls();
+      update();
+    });
+  } else {
     syncControls();
     update();
-  });
+  }
 }
 
 function syncControls() {
