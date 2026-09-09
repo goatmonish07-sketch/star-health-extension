@@ -314,6 +314,7 @@ dl {
 .sitelink a {
   color: var(--teal);
   font-weight: 500;
+  overflow-wrap: anywhere;
 }
 
 :focus-visible {
