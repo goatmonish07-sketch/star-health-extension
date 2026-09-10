@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Health Cover Estimator — India",
   "version": "1.0.0",
-  "description": "Estimate annual health insurance premiums for individual and family floater plans. Transparent, editable rate table. No data leaves your browser.",
+  "description": "Estimate annual health insurance premiums for individual and family floater plans. Editable rate table. No data leaves your browser.",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
